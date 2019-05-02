@@ -1,8 +1,8 @@
 :root {
-  --image-day-pc: url('../../../static/images/backgrounds/bg-night-pc.svg'); // +
-  --image-day-mob: url('../../../static/images/backgrounds/bg-day-mobile.png'); // +
-  --image-night-pc: url('../../../static/images/backgrounds/bg-night-pc.svg');
-  --image-night-mob: url('../../../static/images/backgrounds/bg-night-mobile.png'); // +
+  --image-day-pc: url("./images/bg-night-pc.svg"); // +
+  --image-day-mob: url("./images/bg-day-mobile.png"); // +
+  --image-night-pc: url("./images/bg-night-pc.svg");
+  --image-night-mob: url("./images/bg-night-mobile.png"); // +
 }
 
 .app-background {

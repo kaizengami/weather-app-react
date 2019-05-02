@@ -1,21 +1,17 @@
-import './AppBackground.scss';
-import { Component } from '../../Samsklepav';
+import "./AppBackground.scss";
+import React, { Component } from "react";
 
 class AppBackground extends Component {
-  constructor(props) {
+  constructor(props: boolean) {
     super(props);
+
     this.state = {
       day: true
     };
-    this.host = document.createElement('div');
-    this.host.setAttribute('class', 'app-background');
   }
-  updateState(nextState) {
-    this.state = Object.assign({}, this.state, nextState);
-    this.render();
-  }
+
   render() {
-    return this.host;
+    return <div className="app-background" />;
   }
 }
 
