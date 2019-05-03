@@ -2,13 +2,12 @@ import "./Search.scss";
 import React, { Component } from "react";
 
 interface Props {
-  submit(city: string): void;
+  onSubmit(city: string): void;
 }
 
 interface State {
   isValid: boolean;
   isEmpty: boolean;
-  value: string;
 }
 
 class Search extends Component<Props, State> {
@@ -17,24 +16,22 @@ class Search extends Component<Props, State> {
 
     this.state = {
       isValid: false,
-      isEmpty: true,
-      value: ""
+      isEmpty: true
     };
   }
 
   centerInput = (e: any) => {
     const value = e.target.value;
-    this.setState({ value: value });
     if (value.length) {
       this.setState({ isEmpty: false });
     } else this.setState({ isEmpty: true });
   };
 
   submitInput = (e: any) => {
+    const value = e.target.value;
     if (e.keyCode === 13) {
       const city = e.target.value.trim();
-      if (this.isValidCityName(this.state.value))
-        console.log(this.props.submit(city));
+      if (this.isValidCityName(value)) this.props.onSubmit(city);
     }
   };
   /*
@@ -67,6 +64,7 @@ class Search extends Component<Props, State> {
           type="text"
           ref="search"
           placeholder="City, place or country..."
+          autoComplete="off"
           onInput={e => this.centerInput(e)}
           onKeyUp={e => this.submitInput(e)}
         />
