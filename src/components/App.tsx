@@ -4,14 +4,17 @@ import { AppBackground } from "./AppBackground/";
 import { Search } from "./Search/";
 import { CurrentForecast } from "./CurrentForecast/";
 import { DailyForecast } from "./DailyForecast/";
-import { ForecastStructure } from "../interfaces/Forecast.interface";
+import {
+  ForecastCurrentStructure,
+  ForecastDailyStructure
+} from "../interfaces/Forecast.interface";
 import "./App.scss";
 
 interface Props {}
 
 interface State {
-  currentForecastData: ForecastStructure;
-  dailyForecastData: ForecastStructure;
+  currentForecastData: ForecastCurrentStructure;
+  dailyForecastData: ForecastDailyStructure;
   city: string;
 }
 

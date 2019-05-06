@@ -1,17 +1,24 @@
 import "./CurrentForecast.scss";
 import React from "react";
-import { Forecast } from "../../interfaces/Forecast.interface";
+import { ForecastCurrent } from "../../interfaces/Forecast.interface";
 
-class CurrentForecast extends React.PureComponent<Forecast> {
+class CurrentForecast extends React.PureComponent<ForecastCurrent> {
+  getDate(date: string) {
+    let newDate = new Date(date);
+    return newDate.toLocaleString("en-us", { weekday: "long" });
+  }
+
   render() {
     return (
       <>
         {this.props.forecast.data.length ? (
           <div className="current-forecast">
             <div className="current-forecast-temperature">
-              {this.props.forecast.data[0].app_temp}
+              {Math.round(this.props.forecast.data[0].temp)}
             </div>
-            <div className="current-forecast-day">Monday</div>
+            <div className="current-forecast-day">
+              {this.getDate(this.props.forecast.data[0].timestamp_local)}
+            </div>
           </div>
         ) : (
           <div>not found</div>

@@ -1,12 +1,15 @@
 import "./DailyForecast.scss";
-//import DailyForecastModel from './Model';
 import React from "react";
+import {
+  ForecastDaily,
+  weatherDaily
+} from "../../interfaces/Forecast.interface";
 
-interface Props {
+interface DayProps {
   forecast: any;
 }
 
-class Day extends React.PureComponent {
+class Day extends React.PureComponent<DayProps> {
   render() {
     return (
       <button className="daily-forecast-button">
@@ -30,13 +33,7 @@ class Day extends React.PureComponent {
   }
 }
 
-class DailyForecast extends React.PureComponent<Props> {
-  // createModel(data) {
-  //   const dailyData = data[1].data;
-  //   let DailyForecastData = dailyData.map(day => new DailyForecastModel(day));
-  //   return DailyForecastData;
-  // }
-
+class DailyForecast extends React.PureComponent<ForecastDaily> {
   render() {
     //let dailyData = this.createModel(rawData);
     // const {
@@ -48,10 +45,13 @@ class DailyForecast extends React.PureComponent<Props> {
     //         tempMax,
     //         tempMin
     //       } = this.props;
+    console.log(this.props.forecast);
     return (
       <div className="daily-forecast">
-        <Day />
-        {/* {this.props.data.map(day => <Day data={...day}/> )} */}
+        {/* <Day /> */}
+        {this.props.forecast.data.map(day => (
+          <Day forecast={day} />
+        ))}
       </div>
     );
   }
