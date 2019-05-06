@@ -1,11 +1,14 @@
+let proxyUrl: string = "https://cors-anywhere.herokuapp.com/";
 const API_KEY = "&key=4e4006dc280346f9ab2a2471ffc67574";
-const CURRENT_FORECAST_URL = `https://api.weatherbit.io/v2.0/forecast/hourly?city=`; //two day hourly
-const DAILY_FORECAST_URL = `https://api.weatherbit.io/v2.0/forecast/daily?city=`; // 16 day forecast
+const CURRENT_FORECAST_URL =
+  proxyUrl + `https://api.weatherbit.io/v2.0/forecast/hourly?city=`; //two day hourly
+const DAILY_FORECAST_URL =
+  proxyUrl + `https://api.weatherbit.io/v2.0/forecast/daily?city=`; // 16 day forecast
 const UNITS = "&units=M";
 
-const get = async (url: any) => {
+const get = async (url: string) => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { mode: "cors" });
     if (!response.ok) {
       throw new Error(response.statusText);
     }

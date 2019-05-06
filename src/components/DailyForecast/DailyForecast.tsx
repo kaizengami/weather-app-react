@@ -3,7 +3,7 @@ import "./DailyForecast.scss";
 import React from "react";
 
 interface Props {
-  data: any;
+  forecast: any;
 }
 
 class Day extends React.PureComponent {

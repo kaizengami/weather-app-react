@@ -4,15 +4,37 @@ import { AppBackground } from "./AppBackground/";
 import { Search } from "./Search/";
 import { CurrentForecast } from "./CurrentForecast/";
 import { DailyForecast } from "./DailyForecast/";
+import { ForecastStructure } from "../interfaces/Forecast.interface";
 import "./App.scss";
 
-class App extends Component {
-  state = {
-    data: [],
-    currentForecastData: [],
-    dailyForecastData: [],
-    city: "Kyiv, UA"
-  };
+interface Props {}
+
+interface State {
+  currentForecastData: ForecastStructure;
+  dailyForecastData: ForecastStructure;
+  city: string;
+}
+
+class App extends Component<Props, State> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      currentForecastData: {
+        data: [],
+        city_name: "",
+        country_code: "",
+        timezone: ""
+      },
+      dailyForecastData: {
+        data: [],
+        city_name: "",
+        country_code: "",
+        timezone: ""
+      },
+      city: "Kyiv, UA"
+    };
+  }
 
   componentDidMount() {
     this.onSubmit(this.state.city);
@@ -20,8 +42,9 @@ class App extends Component {
 
   onSubmit = async (city: string) => {
     let data = await getForecast(city);
-    this.setState({ data: data });
-    console.log(this.state.data[0]);
+    this.setState({ currentForecastData: data[0], dailyForecastData: data[1] });
+    console.log(this.state.dailyForecastData);
+    console.log(this.state.currentForecastData);
   };
 
   render() {
@@ -29,8 +52,8 @@ class App extends Component {
       <div className="app">
         <AppBackground />
         <Search onSubmit={this.onSubmit} />
-        <CurrentForecast data={this.state.data[0]} />
-        <DailyForecast data={this.state.data[1]} />
+        <CurrentForecast forecast={this.state.currentForecastData} />
+        <DailyForecast forecast={this.state.dailyForecastData} />
       </div>
     );
   }

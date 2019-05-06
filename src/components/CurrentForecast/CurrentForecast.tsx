@@ -1,33 +1,15 @@
 import "./CurrentForecast.scss";
 import React from "react";
+import { Forecast } from "../../interfaces/Forecast.interface";
 
-interface Props {
-  //data: any;
-  data: {
-    data: ReadonlyArray<weather>;
-  };
-  //data:
-  //city_name: string;
-  //country_code: string;
-}
-
-interface weather {
-  app_temp: string;
-}
-
-// interface weatherData {
-//   data: ReadonlyArray<weather>
-// }
-
-class CurrentForecast extends React.PureComponent<Props> {
+class CurrentForecast extends React.PureComponent<Forecast> {
   render() {
-    console.table(this.props.data);
     return (
       <>
-        {this.props.data ? (
+        {this.props.forecast.data.length ? (
           <div className="current-forecast">
             <div className="current-forecast-temperature">
-              {this.props.data.data[0].app_temp}
+              {this.props.forecast.data[0].app_temp}
             </div>
             <div className="current-forecast-day">Monday</div>
           </div>
