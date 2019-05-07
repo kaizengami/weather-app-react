@@ -19,7 +19,11 @@ interface weather {
 export interface weatherDaily {
   max_temp: number;
   min_temp: number;
-  weatherIcon: {};
+  weather: {
+    code: number;
+    description: string;
+    icon: string;
+  };
   rh: number;
   precip: number;
   wind_dir: number;

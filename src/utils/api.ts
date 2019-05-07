@@ -15,7 +15,8 @@ const get = async (url: string) => {
     let data = await response.json();
     return data;
   } catch (err) {
-    return err;
+    console.log(err);
+    return "error";
   }
 };
 

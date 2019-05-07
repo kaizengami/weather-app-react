@@ -56,9 +56,24 @@
   opacity: 0.7;
 }
 
+.daily-forecast-wind {
+  padding-top: 10px;
+  opacity: 0.7;
+}
+
 .daily-forecast-weather-icon,
 .daily-forecast-temperature {
   opacity: 1;
+}
+
+.daily-forecast-temperature {
+  padding-top: 10px;
+  opacity: 1;
+}
+
+.daily-forecast-humidity i,
+.daily-forecast-preci i {
+  font-size: 4px;
 }
 
 @media only screen and (min-width: 1030px) and (max-width: 1366px) {
@@ -73,6 +88,10 @@
 
   .daily-forecast-col {
     font-size: 20px;
-    margin-top: -5px;
+    margin-top: -35px;
+    text-align: center;
+  }
+  .daily-forecast-col i {
+    font-size: 40px;
   }
 }

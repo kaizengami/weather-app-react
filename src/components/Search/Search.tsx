@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 interface Props {
   onSubmit(city: string): void;
+  city: string;
 }
 
 interface State {
@@ -16,7 +17,7 @@ class Search extends Component<Props, State> {
 
     this.state = {
       isValid: false,
-      isEmpty: true
+      isEmpty: false
     };
   }
 
@@ -34,27 +35,18 @@ class Search extends Component<Props, State> {
       if (this.isValidCityName(value)) this.props.onSubmit(city);
     }
   };
-  /*
-  onKeyup() {
-    if (event.keyCode == 13) {
-      const city = event.target.value.trim();
-      console.log(this.props);
-      if (this.isValidCityName(city)) {
-        this.props.onSubmit(city);
-        if (!this.state.isValid) {
-          this.updateState({ isValid: true });
-        }
-      } else {
-        this.updateState({ isValid: false });
-      }
-    }
-  }
-*/
+
   isValidCityName(name: string) {
     return !!name && !/\d/.test(name);
   }
 
+  componentDidMount() {
+    const search: any = document.getElementById("search");
+    search.value = this.props.city;
+  }
+
   render() {
+    console.log(this.props.city);
     return (
       <div className="search-container">
         <input

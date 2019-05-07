@@ -12,7 +12,7 @@
 
 .current-forecast-temperature::after {
   position: absolute;
-  content: '°';
+  content: "°";
   font-weight: 300;
 }
 
@@ -25,14 +25,14 @@
 
 @media only screen and (min-width: 1030px) and (max-width: 1366px) {
   .current-forecast {
-    margin-top: 100px;
+    margin-top: 150px;
   }
 
   .current-forecast-temperature {
-    font-size: 120px;
+    font-size: 160px;
   }
 
   .current-forecast-day {
-    font-size: 26px;
+    font-size: 30px;
   }
 }

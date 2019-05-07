@@ -16,6 +16,7 @@ interface State {
   currentForecastData: ForecastCurrentStructure;
   dailyForecastData: ForecastDailyStructure;
   city: string;
+  error: boolean;
 }
 
 class App extends Component<Props, State> {
@@ -35,7 +36,8 @@ class App extends Component<Props, State> {
         country_code: "",
         timezone: ""
       },
-      city: "Kyiv, UA"
+      city: "Kyiv, UA",
+      error: false
     };
   }
 
@@ -44,19 +46,35 @@ class App extends Component<Props, State> {
   }
 
   onSubmit = async (city: string) => {
-    let data = await getForecast(city);
-    this.setState({ currentForecastData: data[0], dailyForecastData: data[1] });
-    console.log(this.state.dailyForecastData);
-    console.log(this.state.currentForecastData);
+    let data: any = await getForecast(city);
+    console.log(data);
+    if (data[0] === "error") {
+      console.log("error");
+      this.setState({ error: true });
+    } else {
+      let city = `${data[0].city_name}, ${data[0].country_code}`;
+      this.setState({
+        currentForecastData: data[0],
+        dailyForecastData: data[1],
+        city: city,
+        error: false
+      });
+    }
   };
 
   render() {
     return (
       <div className="app">
         <AppBackground />
-        <Search onSubmit={this.onSubmit} />
-        <CurrentForecast forecast={this.state.currentForecastData} />
-        <DailyForecast forecast={this.state.dailyForecastData} />
+        <Search onSubmit={this.onSubmit} city={this.state.city} />
+        {this.state.error ? (
+          <div className="app-error">City not found</div>
+        ) : (
+          <>
+            <CurrentForecast forecast={this.state.currentForecastData} />
+            <DailyForecast forecast={this.state.dailyForecastData} />
+          </>
+        )}
       </div>
     );
   }

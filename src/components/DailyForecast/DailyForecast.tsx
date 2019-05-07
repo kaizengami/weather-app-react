@@ -4,6 +4,7 @@ import {
   ForecastDaily,
   weatherDaily
 } from "../../interfaces/Forecast.interface";
+import { getWeatherIcon, getWindIcon } from "../../utils/getWeatherIcon";
 
 interface DayProps {
   forecast: weatherDaily;
@@ -15,6 +16,10 @@ class Day extends React.PureComponent<DayProps> {
     return newDate.toLocaleString("en-us", { weekday: "long" });
   }
 
+  getWindIcon(degree: number): string {
+    return "rotateZ(" + degree + "deg)";
+  }
+
   render() {
     console.log(this.props.forecast);
     const {
@@ -22,7 +27,7 @@ class Day extends React.PureComponent<DayProps> {
       precip,
       wind_dir,
       wind_spd,
-      weatherIcon,
+      weather: { code },
       max_temp,
       min_temp,
       datetime
@@ -40,7 +45,12 @@ class Day extends React.PureComponent<DayProps> {
             </div>
           </div>
           <div className="daily-forecast-col">
-            <div className="daily-forecast-wind-icon">icon</div>
+            <div className="daily-forecast-wind-icon">
+              <i
+                className="wi wi-wind-direction"
+                style={{ transform: this.getWindIcon(wind_dir) }}
+              />
+            </div>
             <div className="daily-forecast-wind">
               {Math.round(wind_spd)}
               <span>m/s</span>
@@ -48,7 +58,9 @@ class Day extends React.PureComponent<DayProps> {
           </div>
         </div>
         <div className="daily-forecast-col">
-          <div className="daily-forecast-weather-icon">icon</div>
+          <div className="daily-forecast-weather-icon">
+            <i className={"wi " + getWeatherIcon(code)} />
+          </div>
           <div className="daily-forecast-temperature">
             {Math.round(max_temp)}
           </div>
@@ -60,11 +72,10 @@ class Day extends React.PureComponent<DayProps> {
 
 class DailyForecast extends React.PureComponent<ForecastDaily> {
   render() {
-    console.log(this.props.forecast);
     return (
       <div className="daily-forecast">
         {this.props.forecast.data.map(day => (
-          <Day forecast={day} />
+          <Day forecast={day} key={day.datetime} />
         ))}
       </div>
     );
