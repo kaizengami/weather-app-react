@@ -17,13 +17,14 @@ interface weather {
 }
 
 export interface weatherDaily {
-  tempMax: number;
-  tempMin: number;
+  max_temp: number;
+  min_temp: number;
   weatherIcon: {};
-  humidity: string;
-  precip: string;
-  windDirection: string;
-  windSpeed: number;
+  rh: number;
+  precip: number;
+  wind_dir: number;
+  wind_spd: number;
+  datetime: string;
 }
 
 export interface ForecastCurrentStructure {
