@@ -20,7 +20,7 @@ interface State {
 }
 
 class App extends Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -45,17 +45,27 @@ class App extends Component<Props, State> {
     this.onSubmit(this.state.city);
   }
 
+  removeFirstDay(forecast: any) {
+    forecast.data.shift();
+    return forecast;
+  }
+
+  onSearchChange = (value: string) => {
+    this.setState({ city: value });
+  };
+
   onSubmit = async (city: string) => {
     let data: any = await getForecast(city);
-    console.log(data);
     if (data[0] === "error") {
       console.log("error");
       this.setState({ error: true });
     } else {
       let city = `${data[0].city_name}, ${data[0].country_code}`;
+      let currentForecastData = data[0];
+      let dailyForecastData = this.removeFirstDay(data[1]);
       this.setState({
-        currentForecastData: data[0],
-        dailyForecastData: data[1],
+        currentForecastData: currentForecastData,
+        dailyForecastData: dailyForecastData,
         city: city,
         error: false
       });
@@ -66,7 +76,11 @@ class App extends Component<Props, State> {
     return (
       <div className="app">
         <AppBackground />
-        <Search onSubmit={this.onSubmit} city={this.state.city} />
+        <Search
+          onSubmit={this.onSubmit}
+          onChange={this.onSearchChange}
+          city={this.state.city}
+        />
         {this.state.error ? (
           <div className="app-error">City not found</div>
         ) : (

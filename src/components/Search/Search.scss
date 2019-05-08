@@ -1,6 +1,6 @@
 #search {
   position: absolute;
-  margin-top: 50px;
+  margin-top: 20px;
   left: 50%;
   transform: translate(-50%, 0);
   display: flex;
@@ -42,11 +42,11 @@ input:hover::placeholder {
   color: var(--search-placeholder-color-hover);
 }
 
-.search-not-empty{
+.search-not-empty {
   left: calc(50%) !important;
 }
 
-@media only screen and (min-width: 1030px) and (max-width: 1366px)  {
+@media only screen and (min-width: 1030px) and (max-width: 1366px) {
   #search {
     margin-top: 10px;
     font-size: 32px;
@@ -57,5 +57,21 @@ input:hover::placeholder {
     font-size: 22px;
     padding-left: 240px;
     color: var(--search-placeholder-color);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #search {
+    position: absolute;
+    margin-top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    left: calc(50% - 160px);
+    transform: translate(-50%, 0);
+    font-weight: 400;
+    font-size: 40px;
+    border-width: 0px;
+    width: 200%;
   }
 }

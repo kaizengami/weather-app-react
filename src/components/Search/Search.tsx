@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 interface Props {
   onSubmit(city: string): void;
+  onChange(city: string): void;
   city: string;
 }
 
@@ -12,13 +13,15 @@ interface State {
 }
 
 class Search extends Component<Props, State> {
-  constructor(props: any) {
+  private input: React.RefObject<HTMLInputElement>;
+  constructor(props: Props) {
     super(props);
 
     this.state = {
       isValid: false,
       isEmpty: false
     };
+    this.input = React.createRef();
   }
 
   centerInput = (e: any) => {
@@ -26,11 +29,14 @@ class Search extends Component<Props, State> {
     if (value.length) {
       this.setState({ isEmpty: false });
     } else this.setState({ isEmpty: true });
+
+    this.props.onChange(value);
   };
 
   submitInput = (e: any) => {
     const value = e.target.value;
-    if (e.keyCode === 13) {
+    const enterCode = 13;
+    if (e.keyCode === enterCode) {
       const city = e.target.value.trim();
       if (this.isValidCityName(value)) this.props.onSubmit(city);
     }
@@ -54,10 +60,12 @@ class Search extends Component<Props, State> {
           id="search"
           name="search"
           type="text"
-          ref="search"
+          value={this.props.city}
+          ref={this.input}
           placeholder="City, place or country..."
           autoComplete="off"
-          onInput={e => this.centerInput(e)}
+          // onInput={e => this.centerInput(e)}
+          onChange={e => this.centerInput(e)}
           onKeyUp={e => this.submitInput(e)}
         />
       </div>

@@ -1,4 +1,5 @@
-let proxyUrl: string = "https://cors-anywhere.herokuapp.com/";
+//let proxyUrl: string = "https://cors-anywhere.herokuapp.com/";
+let proxyUrl: string = "";
 const API_KEY = "&key=4e4006dc280346f9ab2a2471ffc67574";
 const CURRENT_FORECAST_URL =
   proxyUrl + `https://api.weatherbit.io/v2.0/forecast/hourly?city=`; //two day hourly

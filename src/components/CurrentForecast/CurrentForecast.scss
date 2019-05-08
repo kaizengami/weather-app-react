@@ -8,12 +8,15 @@
 
 .current-forecast-temperature {
   font-size: 150px;
+  text-align: center;
 }
 
 .current-forecast-temperature::after {
   position: absolute;
   content: "°";
+  font-size: 130px;
   font-weight: 300;
+  padding-top: 6px;
 }
 
 .current-forecast-day {
@@ -21,6 +24,7 @@
   font-weight: 300;
   text-transform: capitalize;
   text-align: center;
+  opacity: 0.8;
 }
 
 @media only screen and (min-width: 1030px) and (max-width: 1366px) {
@@ -34,5 +38,15 @@
 
   .current-forecast-day {
     font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .current-forecast {
+    margin-top: 200px;
+  }
+
+  .current-forecast-day {
+    font-size: 32px;
   }
 }

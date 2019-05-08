@@ -19,6 +19,7 @@
 .daily-forecast-button {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 800px;
 }
 
@@ -34,18 +35,14 @@
   //padding-left: 20px;
 }
 
-.daily-forecast-button:first-child {
-  display: none;
-}
-
 .daily-forecast-day {
   width: 200px;
   text-align: left;
   text-transform: capitalize;
+  opacity: 0.7;
 }
 
 .daily-forecast-col {
-  margin-top: -15px;
   font-size: 36px;
 }
 
@@ -53,22 +50,25 @@
 .daily-forecast-precip,
 .daily-forecast-wind-icon,
 .daily-forecast-wind {
+  opacity: 0.3;
+}
+
+.daily-forecast-weather-icon {
+  opacity: 0.9;
+}
+
+.daily-forecast-temperature {
   opacity: 0.7;
 }
 
+.daily-forecast-temperature::after {
+  content: "°";
+}
+
+.daily-forecast-precip,
+.daily-forecast-temperature,
 .daily-forecast-wind {
   padding-top: 10px;
-  opacity: 0.7;
-}
-
-.daily-forecast-weather-icon,
-.daily-forecast-temperature {
-  opacity: 1;
-}
-
-.daily-forecast-temperature {
-  padding-top: 10px;
-  opacity: 1;
 }
 
 .daily-forecast-humidity i,
@@ -93,5 +93,65 @@
   }
   .daily-forecast-col i {
     font-size: 40px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .daily-forecast {
+    font-size: 20px;
+    margin-top: calc(100vh - 50px);
+    padding-bottom: 30px;
+  }
+
+  .daily-forecast-button {
+    width: 340px;
+    height: 40px;
+  }
+
+  .daily-forecast-col {
+    font-size: 15px;
+  }
+
+  .daily-forecast-col:nth-child(1),
+  .daily-forecast-col:nth-child(2) {
+    font-size: 10px;
+  }
+
+  .daily-forecast-block {
+    width: 100px;
+  }
+
+  .daily-forecast-day {
+    width: 100px;
+  }
+
+  .daily-forecast-humidity {
+    margin-top: 13px;
+  }
+
+  .daily-forecast-humidity i,
+  .daily-forecast-precip i {
+    font-size: 10px;
+    padding-top: 2px;
+  }
+
+  .daily-forecast-wind-icon {
+    font-size: 20px;
+    padding-top: 5px;
+    text-align: center;
+  }
+
+  .daily-forecast-weather-icon i {
+    font-size: 30px;
+  }
+
+  .daily-forecast-button .daily-forecast-col {
+    margin-top: -13px;
+  }
+
+  .daily-forecast-precip,
+  .daily-forecast-temperature,
+  .daily-forecast-wind {
+    padding-top: 8px;
   }
 }
