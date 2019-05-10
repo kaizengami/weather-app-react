@@ -1,6 +1,6 @@
 import "./CurrentForecast.scss";
 import React from "react";
-import { ForecastCurrent } from "../../interfaces/Forecast.interface";
+import { ForecastCurrent } from "./CurrentForecast.interface";
 
 class CurrentForecast extends React.PureComponent<ForecastCurrent> {
   getDate(date: string): string {

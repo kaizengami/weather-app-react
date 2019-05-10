@@ -1,6 +1,6 @@
 import "./DailyForecast.scss";
 import React from "react";
-import { ForecastDaily } from "../../interfaces/Forecast.interface";
+import { ForecastDaily } from "./DailyForecast.interface";
 
 import Day from "./Day";
 

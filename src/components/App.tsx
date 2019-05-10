@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _get from "lodash/get";
 import { getForecast } from "../utils/api";
 import { AppBackground } from "./AppBackground/";
 import { Search } from "./Search/";
@@ -7,7 +8,7 @@ import { DailyForecast } from "./DailyForecast/";
 import {
   ForecastCurrentStructure,
   ForecastDailyStructure
-} from "../interfaces/Forecast.interface";
+} from "./App.interface";
 import "./App.scss";
 
 interface Props {}
@@ -60,7 +61,9 @@ class App extends Component<Props, State> {
       console.log("error");
       this.setState({ error: true });
     } else {
-      let city = `${data[0].city_name}, ${data[0].country_code}`;
+      let cityName = _get(data[0], "city_name");
+      let countryСode = _get(data[0], "country_code");
+      let city = `${cityName}, ${countryСode}`;
       let currentForecastData = data[0];
       let dailyForecastData = this.removeFirstDay(data[1]);
       this.setState({

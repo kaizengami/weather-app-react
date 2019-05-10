@@ -1,5 +1,5 @@
 import React from "react";
-import { weatherDaily } from "../../interfaces/Forecast.interface";
+import { weatherDaily } from "../App.interface";
 import { getWeatherIcon, getWindIcon } from "../../utils/getWeatherIcon";
 
 interface DayProps {
