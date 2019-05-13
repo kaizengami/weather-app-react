@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import _get from "lodash/get";
 import { getForecast } from "../utils/api";
 import { AppBackground } from "./AppBackground/";
+import { Menu } from "./Menu/";
 import { Search } from "./Search/";
 import { CurrentForecast } from "./CurrentForecast/";
 import { DailyForecast } from "./DailyForecast/";
 import {
   ForecastCurrentStructure,
-  ForecastDailyStructure
+  ForecastDailyStructure,
+  MenuStructure
 } from "./App.interface";
 import "./App.scss";
 
@@ -16,6 +18,7 @@ interface Props {}
 interface State {
   currentForecastData: ForecastCurrentStructure;
   dailyForecastData: ForecastDailyStructure;
+  menu: MenuStructure;
   city: string;
   error: boolean;
 }
@@ -36,6 +39,11 @@ class App extends Component<Props, State> {
         city_name: "",
         country_code: "",
         timezone: ""
+      },
+      menu: {
+        isMenuOpen: false,
+        isButtonSimple: true,
+        isButtonTheme: false
       },
       city: "Kyiv, UA",
       error: false
@@ -75,10 +83,30 @@ class App extends Component<Props, State> {
     }
   };
 
+  menuButtonSimple = () => {
+    this.setState(prevState => ({
+      menu: {
+        ...this.state.menu,
+        isButtonSimple: !prevState.menu.isButtonSimple
+      }
+    }));
+    console.log("menuButtonSimple");
+  };
+
+  menuButtonTheme = () => {
+    console.log("menuButtonTheme");
+  };
+
   render() {
     return (
       <div className="app">
         <AppBackground />
+        <Menu
+          onClickButtonSimple={this.menuButtonSimple}
+          onClickButtonTheme={this.menuButtonTheme}
+          isButtonSimple={this.state.menu.isButtonSimple}
+          isButtonTheme={this.state.menu.isButtonSimple}
+        />
         <Search
           onSubmit={this.onSubmit}
           onChange={this.onSearchChange}
@@ -89,7 +117,10 @@ class App extends Component<Props, State> {
         ) : (
           <>
             <CurrentForecast forecast={this.state.currentForecastData} />
-            <DailyForecast forecast={this.state.dailyForecastData} />
+            <DailyForecast
+              forecast={this.state.dailyForecastData}
+              isSimpleMode={this.state.menu.isButtonSimple}
+            />
           </>
         )}
       </div>

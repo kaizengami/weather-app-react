@@ -36,3 +36,9 @@ interface weatherCurrent {
   windDirection: string;
   windSpeed: number;
 }
+
+export interface MenuStructure {
+  isMenuOpen: boolean;
+  isButtonSimple: boolean;
+  isButtonTheme: boolean;
+}

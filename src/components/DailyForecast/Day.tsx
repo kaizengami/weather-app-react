@@ -4,6 +4,8 @@ import { getWeatherIcon, getWindIcon } from "../../utils/getWeatherIcon";
 
 interface DayProps {
   forecast: weatherDaily;
+  render: any;
+  isSimpleMode: boolean;
 }
 
 class Day extends React.PureComponent<DayProps> {
@@ -26,7 +28,24 @@ class Day extends React.PureComponent<DayProps> {
     return (
       <button className="daily-forecast-button">
         <div className="daily-forecast-day">{this.getDate(datetime)}</div>
-        <div className="daily-forecast-block">
+        {this.props.render(this.props.isSimpleMode)}
+        <div className="daily-forecast-col">
+          <div className="daily-forecast-weather-icon">
+            <i className={"wi " + getWeatherIcon(code)} />
+          </div>
+          <div className="daily-forecast-temperature">
+            {Math.round(max_temp)}
+          </div>
+        </div>
+      </button>
+    );
+  }
+}
+
+export default Day;
+
+{
+  /* <div className="daily-forecast-block">
           <div className="daily-forecast-col">
             <div className="daily-forecast-humidity">
               <i className="wi wi-raindrop" /> {Math.round(rh)} %
@@ -47,18 +66,5 @@ class Day extends React.PureComponent<DayProps> {
               <span>m/s</span>
             </div>
           </div>
-        </div>
-        <div className="daily-forecast-col">
-          <div className="daily-forecast-weather-icon">
-            <i className={"wi " + getWeatherIcon(code)} />
-          </div>
-          <div className="daily-forecast-temperature">
-            {Math.round(max_temp)}
-          </div>
-        </div>
-      </button>
-    );
-  }
+        </div> */
 }
-
-export default Day;
