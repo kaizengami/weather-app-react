@@ -59,9 +59,7 @@ class AppBackground extends Component<Props> {
   }
 
   render() {
-    {
-      this.appBackground.current && this.setBackgroundImage();
-    }
+    this.setBackgroundImage();
 
     return (
       <ThemeContext.Consumer>
