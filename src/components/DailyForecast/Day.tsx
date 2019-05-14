@@ -1,6 +1,6 @@
 import React from "react";
 import { weatherDaily } from "../App.interface";
-import { getWeatherIcon, getWindIcon } from "../../utils/getWeatherIcon";
+import { getWeatherIcon } from "../../utils/getWeatherIcon";
 
 interface DayProps {
   forecast: weatherDaily;
@@ -16,10 +16,6 @@ class Day extends React.PureComponent<DayProps> {
 
   render() {
     const {
-      rh,
-      precip,
-      wind_dir,
-      wind_spd,
       weather: { code },
       max_temp,
       min_temp,
@@ -44,8 +40,7 @@ class Day extends React.PureComponent<DayProps> {
 
 export default Day;
 
-{
-  /* <div className="daily-forecast-block">
+/* <div className="daily-forecast-block">
           <div className="daily-forecast-col">
             <div className="daily-forecast-humidity">
               <i className="wi wi-raindrop" /> {Math.round(rh)} %
@@ -67,4 +62,3 @@ export default Day;
             </div>
           </div>
         </div> */
-}

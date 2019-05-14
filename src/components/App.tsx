@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import _get from "lodash/get";
 import { getForecast } from "../utils/api";
+import { ThemeContext, themes } from "./Themes/theme-context";
 import { AppBackground } from "./AppBackground/";
 import { Menu } from "./Menu/";
 import { Search } from "./Search/";
@@ -9,7 +10,8 @@ import { DailyForecast } from "./DailyForecast/";
 import {
   ForecastCurrentStructure,
   ForecastDailyStructure,
-  MenuStructure
+  MenuStructure,
+  Themes
 } from "./App.interface";
 import "./App.scss";
 
@@ -21,11 +23,19 @@ interface State {
   menu: MenuStructure;
   city: string;
   error: boolean;
+  theme: Themes;
+  toggleTheme: any;
 }
 
 class App extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
+    this.toggleTheme = () => {
+      this.setState(state => ({
+        theme: state.theme === themes.dark ? themes.light : themes.dark
+      }));
+    };
 
     this.state = {
       currentForecastData: {
@@ -46,13 +56,17 @@ class App extends Component<Props, State> {
         isButtonTheme: false
       },
       city: "Kyiv, UA",
-      error: false
+      error: false,
+      theme: themes.light,
+      toggleTheme: this.toggleTheme
     };
   }
 
   componentDidMount() {
     this.onSubmit(this.state.city);
   }
+
+  toggleTheme() {}
 
   removeFirstDay(forecast: any) {
     forecast.data.shift();
@@ -100,29 +114,31 @@ class App extends Component<Props, State> {
   render() {
     return (
       <div className="app">
-        <AppBackground />
-        <Menu
-          onClickButtonSimple={this.menuButtonSimple}
-          onClickButtonTheme={this.menuButtonTheme}
-          isButtonSimple={this.state.menu.isButtonSimple}
-          isButtonTheme={this.state.menu.isButtonSimple}
-        />
-        <Search
-          onSubmit={this.onSubmit}
-          onChange={this.onSearchChange}
-          city={this.state.city}
-        />
-        {this.state.error ? (
-          <div className="app-error">City not found</div>
-        ) : (
-          <>
-            <CurrentForecast forecast={this.state.currentForecastData} />
-            <DailyForecast
-              forecast={this.state.dailyForecastData}
-              isSimpleMode={this.state.menu.isButtonSimple}
-            />
-          </>
-        )}
+        <ThemeContext.Provider value={this.state}>
+          <AppBackground />
+          <Menu
+            onClickButtonSimple={this.menuButtonSimple}
+            onClickButtonTheme={this.menuButtonTheme}
+            isButtonSimple={this.state.menu.isButtonSimple}
+            isButtonTheme={this.state.menu.isButtonTheme}
+          />
+          <Search
+            onSubmit={this.onSubmit}
+            onChange={this.onSearchChange}
+            city={this.state.city}
+          />
+          {this.state.error ? (
+            <div className="app-error">City not found</div>
+          ) : (
+            <>
+              <CurrentForecast forecast={this.state.currentForecastData} />
+              <DailyForecast
+                forecast={this.state.dailyForecastData}
+                isSimpleMode={this.state.menu.isButtonSimple}
+              />
+            </>
+          )}
+        </ThemeContext.Provider>
       </div>
     );
   }

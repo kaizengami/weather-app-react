@@ -18,6 +18,10 @@
   transition: all 0.2s ease-in-out;
 }
 
+.menu-button-open {
+  color: aqua !important;
+}
+
 .nav-icon-open:before {
   transform: translateY(12px) rotate(135deg);
 }

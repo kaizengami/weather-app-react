@@ -42,3 +42,12 @@ export interface MenuStructure {
   isButtonSimple: boolean;
   isButtonTheme: boolean;
 }
+
+export interface Themes {
+  appBackground: {
+    background: string;
+  };
+  dailyForecast: {
+    background: string;
+  };
+}

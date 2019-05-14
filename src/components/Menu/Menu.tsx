@@ -1,5 +1,6 @@
 import "./Menu.scss";
 import React, { Component } from "react";
+import { ThemeContext } from "../Themes/theme-context";
 
 interface Props {
   onClickButtonSimple(): void;
@@ -15,7 +16,6 @@ interface State {
 }
 
 class Menu extends Component<Props, State> {
-  private input: React.RefObject<HTMLInputElement>;
   constructor(props: Props) {
     super(props);
 
@@ -24,7 +24,6 @@ class Menu extends Component<Props, State> {
       buttonSimple: this.props.isButtonSimple,
       buttonTheme: this.props.isButtonTheme
     };
-    this.input = React.createRef();
   }
 
   onClickMenu = (e: any) => {
@@ -49,30 +48,47 @@ class Menu extends Component<Props, State> {
 
   render() {
     return (
-      <div className="app-menu">
-        <div
-          className={this.state.isOpen ? "nav-icon nav-icon-open" : "nav-icon"}
-          onClick={e => this.onClickMenu(e)}
-        >
-          <div />
-        </div>
-        {this.state.isOpen && (
-          <>
-            <button
-              className="app-menu-button button-simple"
-              onClick={e => this.onClickButtonSimple(e)}
+      <ThemeContext.Consumer>
+        {({ toggleTheme }) => (
+          <div className="app-menu">
+            <div
+              className={
+                this.state.isOpen ? "nav-icon nav-icon-open" : "nav-icon"
+              }
+              onClick={e => this.onClickMenu(e)}
             >
-              Simple mode {this.state.buttonSimple ? "on" : "off"}
-            </button>
-            <button
-              className="app-menu-button button-theme"
-              onClick={e => this.onClickTheme(e)}
-            >
-              Dark theme {this.state.buttonTheme ? "on" : "off"}
-            </button>
-          </>
+              <div />
+            </div>
+            {this.state.isOpen && (
+              <>
+                <button
+                  className={
+                    this.state.buttonSimple
+                      ? "app-menu-button button-simple menu-button-open"
+                      : "app-menu-button button-simple"
+                  }
+                  onClick={e => this.onClickButtonSimple(e)}
+                >
+                  Simple mode {this.state.buttonSimple ? "on" : "off"}
+                </button>
+                <button
+                  className={
+                    this.state.buttonTheme
+                      ? "app-menu-button button-theme menu-button-open"
+                      : "app-menu-button button-theme"
+                  }
+                  onClick={e => {
+                    this.onClickTheme(e);
+                    toggleTheme();
+                  }}
+                >
+                  Dark theme {this.state.buttonTheme ? "on" : "off"}
+                </button>
+              </>
+            )}
+          </div>
         )}
-      </div>
+      </ThemeContext.Consumer>
     );
   }
 }

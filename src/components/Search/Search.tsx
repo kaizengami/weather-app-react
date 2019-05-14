@@ -52,7 +52,6 @@ class Search extends Component<Props, State> {
   }
 
   render() {
-    console.log(this.props.city);
     return (
       <div className="search-container">
         <input
