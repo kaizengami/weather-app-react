@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/weather-app-react/static/css/main.f4902980.chunk.css",
-    "main.js": "/weather-app-react/static/js/main.5ed6943d.chunk.js",
-    "main.js.map": "/weather-app-react/static/js/main.5ed6943d.chunk.js.map",
-    "runtime~main.js": "/weather-app-react/static/js/runtime~main.a31b442a.js",
-    "runtime~main.js.map": "/weather-app-react/static/js/runtime~main.a31b442a.js.map",
-    "static/js/2.edd34329.chunk.js": "/weather-app-react/static/js/2.edd34329.chunk.js",
-    "static/js/2.edd34329.chunk.js.map": "/weather-app-react/static/js/2.edd34329.chunk.js.map",
-    "index.html": "/weather-app-react/index.html",
-    "precache-manifest.954b2743cfd887b23dd9efd28b6a4b15.js": "/weather-app-react/precache-manifest.954b2743cfd887b23dd9efd28b6a4b15.js",
-    "service-worker.js": "/weather-app-react/service-worker.js",
-    "static/css/main.f4902980.chunk.css.map": "/weather-app-react/static/css/main.f4902980.chunk.css.map",
-    "static/media/index.scss": "/weather-app-react/static/media/weathericons-regular-webfont.ed0943f2.svg",
-    "static/media/AppBackground.scss": "/weather-app-react/static/media/bg-night-pc.ea2b56cc.svg"
+    "main.css": "/weather-app-react/build/static/css/main.f24fb190.chunk.css",
+    "main.js": "/weather-app-react/build/static/js/main.84cd8aee.chunk.js",
+    "main.js.map": "/weather-app-react/build/static/js/main.84cd8aee.chunk.js.map",
+    "runtime~main.js": "/weather-app-react/build/static/js/runtime~main.ae2edcc2.js",
+    "runtime~main.js.map": "/weather-app-react/build/static/js/runtime~main.ae2edcc2.js.map",
+    "static/js/2.7d14ea8f.chunk.js": "/weather-app-react/build/static/js/2.7d14ea8f.chunk.js",
+    "static/js/2.7d14ea8f.chunk.js.map": "/weather-app-react/build/static/js/2.7d14ea8f.chunk.js.map",
+    "index.html": "/weather-app-react/build/index.html",
+    "precache-manifest.ba4c4634404b369887fa4c65a6086af6.js": "/weather-app-react/build/precache-manifest.ba4c4634404b369887fa4c65a6086af6.js",
+    "service-worker.js": "/weather-app-react/build/service-worker.js",
+    "static/css/main.f24fb190.chunk.css.map": "/weather-app-react/build/static/css/main.f24fb190.chunk.css.map",
+    "static/media/index.scss": "/weather-app-react/build/static/media/weathericons-regular-webfont.ed0943f2.svg",
+    "static/media/AppBackground.scss": "/weather-app-react/build/static/media/bg-night-pc.ea2b56cc.svg"
   }
 }

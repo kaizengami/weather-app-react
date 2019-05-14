@@ -36,7 +36,6 @@ class AppBackground extends Component<Props> {
 
   setBackgroundImage() {
     if (this.appBackground.current != null) {
-      const appBackground: any = document.querySelector(".app-background");
       if (this.props.dayTime) {
         document.documentElement.style.setProperty(
           "--image-pc",
