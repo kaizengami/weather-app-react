@@ -4,7 +4,7 @@ import { getWeatherIcon } from "../../utils/getWeatherIcon";
 
 interface DayProps {
   forecast: weatherDaily;
-  render: any;
+  render(isSimpleMode: boolean): void;
   isSimpleMode: boolean;
 }
 

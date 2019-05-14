@@ -22,9 +22,10 @@ interface State {
   dailyForecastData: ForecastDailyStructure;
   menu: MenuStructure;
   city: string;
+  dayTime: boolean;
   error: boolean;
   theme: Themes;
-  toggleTheme: any;
+  toggleTheme(): void;
 }
 
 class App extends Component<Props, State> {
@@ -56,6 +57,7 @@ class App extends Component<Props, State> {
         isButtonTheme: false
       },
       city: "Kyiv, UA",
+      dayTime: true,
       error: false,
       theme: themes.light,
       toggleTheme: this.toggleTheme
@@ -79,6 +81,7 @@ class App extends Component<Props, State> {
 
   onSubmit = async (city: string) => {
     let data: any = await getForecast(city);
+    console.log(data);
     if (data[0] === "error") {
       console.log("error");
       this.setState({ error: true });
@@ -87,15 +90,23 @@ class App extends Component<Props, State> {
       let countryСode = _get(data[0], "country_code");
       let city = `${cityName}, ${countryСode}`;
       let currentForecastData = data[0];
+      let currentTimeRaw = data[0].data[0].timestamp_local;
       let dailyForecastData = this.removeFirstDay(data[1]);
+      let currentTime = this.getTime(currentTimeRaw);
       this.setState({
         currentForecastData: currentForecastData,
         dailyForecastData: dailyForecastData,
         city: city,
+        dayTime: currentTime > 6 && currentTime < 18 ? true : false,
         error: false
       });
     }
   };
+
+  getTime(date: string): number {
+    let newDate = new Date(date);
+    return newDate.getHours();
+  }
 
   menuButtonSimple = () => {
     this.setState(prevState => ({
@@ -104,18 +115,17 @@ class App extends Component<Props, State> {
         isButtonSimple: !prevState.menu.isButtonSimple
       }
     }));
-    console.log("menuButtonSimple");
   };
 
   menuButtonTheme = () => {
-    console.log("menuButtonTheme");
+    this.toggleTheme();
   };
 
   render() {
     return (
       <div className="app">
         <ThemeContext.Provider value={this.state}>
-          <AppBackground />
+          <AppBackground dayTime={this.state.dayTime} />
           <Menu
             onClickButtonSimple={this.menuButtonSimple}
             onClickButtonTheme={this.menuButtonTheme}

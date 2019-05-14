@@ -3,13 +3,16 @@
   --image-day-mob: url("./images/bg-day-mobile.png"); // +
   --image-night-pc: url("./images/bg-night-pc.svg");
   --image-night-mob: url("./images/bg-night-mobile.png"); // +
+
+  --image-pc: url("./images/bg-night-pc.svg");
+  --image-mobile: url("./images/bg-day-mobile.png"); // +
 }
 
 .app-background {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: var(--image-day-pc);
+  background-image: var(--image-pc);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -23,6 +26,6 @@
 
 @media only screen and (max-width: 768px) {
   .app-background {
-    background-image: var(--image-day-mob);
+    background-image: var(--image-mobile);
   }
 }
