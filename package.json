@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://github.com/kaizengami/weather-app-react",
+  "homepage": "https://kaizengami.github.io/weather-app-react/",
   "author": "kaizengami",
   "eslintConfig": {
     "extends": "react-app"
