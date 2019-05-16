@@ -18,10 +18,12 @@ class DailyForecast extends React.PureComponent<ForecastDaily> {
               <Day
                 forecast={day}
                 key={day.datetime}
-                render={(isSimpleMode: boolean) => (
-                  <ForecastDetails displayMode={isSimpleMode} forecast={day} />
+                renderForecastDetails={() => (
+                  <ForecastDetails
+                    isSimpleMode={this.props.isSimpleMode}
+                    forecast={day}
+                  />
                 )}
-                isSimpleMode={this.props.isSimpleMode}
               />
             ))}
           </div>

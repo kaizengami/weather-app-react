@@ -5,6 +5,7 @@ import { ThemeContext, themes } from "./Themes/theme-context";
 import { AppBackground } from "./AppBackground/";
 import { Menu } from "./Menu/";
 import { Search } from "./Search/";
+import { Spinner } from "./LoadingAnimation/";
 import { CurrentForecast } from "./CurrentForecast/";
 import { DailyForecast } from "./DailyForecast/";
 import {
@@ -21,6 +22,7 @@ interface State {
   currentForecastData: ForecastCurrentStructure;
   dailyForecastData: ForecastDailyStructure;
   menu: MenuStructure;
+  isLoading: boolean;
   city: string;
   dayTime: boolean;
   error: boolean;
@@ -31,12 +33,6 @@ interface State {
 class App extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
-    this.toggleTheme = () => {
-      this.setState(state => ({
-        theme: state.theme === themes.dark ? themes.light : themes.dark
-      }));
-    };
 
     this.state = {
       currentForecastData: {
@@ -56,6 +52,7 @@ class App extends Component<Props, State> {
         isButtonSimple: true,
         isButtonTheme: false
       },
+      isLoading: true,
       city: "Kyiv, UA",
       dayTime: true,
       error: false,
@@ -68,7 +65,11 @@ class App extends Component<Props, State> {
     this.onSubmit(this.state.city);
   }
 
-  toggleTheme() {}
+  toggleTheme() {
+    this.setState(state => ({
+      theme: state.theme === themes.dark ? themes.light : themes.dark
+    }));
+  }
 
   removeFirstDay(forecast: any) {
     forecast.data.shift();
@@ -89,18 +90,25 @@ class App extends Component<Props, State> {
       let cityName = _get(data[0], "city_name");
       let countryСode = _get(data[0], "country_code");
       let city = `${cityName}, ${countryСode}`;
+      let currentTimeRaw = _get(data[0].data[0], "timestamp_local");
       let currentForecastData = data[0];
-      let currentTimeRaw = data[0].data[0].timestamp_local;
       let dailyForecastData = this.removeFirstDay(data[1]);
       let currentTime = this.getTime(currentTimeRaw);
       this.setState({
         currentForecastData: currentForecastData,
         dailyForecastData: dailyForecastData,
+        isLoading: false,
         city: city,
         dayTime: currentTime > 6 && currentTime < 18 ? true : false,
         error: false
       });
     }
+  };
+
+  turnOnLoading = () => {
+    this.setState({
+      isLoading: true
+    });
   };
 
   getTime(date: string): number {
@@ -127,8 +135,8 @@ class App extends Component<Props, State> {
         <ThemeContext.Provider value={this.state}>
           <AppBackground dayTime={this.state.dayTime} />
           <Menu
-            onClickButtonSimple={this.menuButtonSimple}
-            onClickButtonTheme={this.menuButtonTheme}
+            toggleButtonSimple={this.menuButtonSimple}
+            toggleButtonTheme={this.menuButtonTheme}
             isButtonSimple={this.state.menu.isButtonSimple}
             isButtonTheme={this.state.menu.isButtonTheme}
           />
@@ -136,16 +144,23 @@ class App extends Component<Props, State> {
             onSubmit={this.onSubmit}
             onChange={this.onSearchChange}
             city={this.state.city}
+            turnOnLoading={this.turnOnLoading}
           />
           {this.state.error ? (
             <div className="app-error">City not found</div>
           ) : (
             <>
-              <CurrentForecast forecast={this.state.currentForecastData} />
-              <DailyForecast
-                forecast={this.state.dailyForecastData}
-                isSimpleMode={this.state.menu.isButtonSimple}
-              />
+              {this.state.isLoading ? (
+                <Spinner />
+              ) : (
+                <>
+                  <CurrentForecast forecast={this.state.currentForecastData} />
+                  <DailyForecast
+                    forecast={this.state.dailyForecastData}
+                    isSimpleMode={this.state.menu.isButtonSimple}
+                  />
+                </>
+              )}
             </>
           )}
         </ThemeContext.Provider>

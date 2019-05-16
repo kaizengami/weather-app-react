@@ -5,6 +5,7 @@ interface Props {
   onSubmit(city: string): void;
   onChange(city: string): void;
   city: string;
+  turnOnLoading(): void;
 }
 
 interface State {
@@ -38,7 +39,10 @@ class Search extends Component<Props, State> {
     const enterCode = 13;
     if (e.keyCode === enterCode) {
       const city = e.target.value.trim();
-      if (this.isValidCityName(value)) this.props.onSubmit(city);
+      if (this.isValidCityName(value)) {
+        this.props.turnOnLoading();
+        this.props.onSubmit(city);
+      }
     }
   };
 

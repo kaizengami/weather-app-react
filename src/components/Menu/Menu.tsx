@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { ThemeContext } from "../Themes/theme-context";
 
 interface Props {
-  onClickButtonSimple(): void;
-  onClickButtonTheme(): void;
+  toggleButtonSimple(): void;
+  toggleButtonTheme(): void;
   isButtonSimple: boolean;
   isButtonTheme: boolean;
 }
@@ -36,14 +36,14 @@ class Menu extends Component<Props, State> {
     this.setState(prevState => ({
       buttonSimple: !prevState.buttonSimple
     }));
-    this.props.onClickButtonSimple();
+    this.props.toggleButtonSimple();
   };
 
   onClickTheme = (e: any) => {
     this.setState(prevState => ({
       buttonTheme: !prevState.buttonTheme
     }));
-    this.props.onClickButtonTheme();
+    this.props.toggleButtonTheme();
   };
 
   render() {

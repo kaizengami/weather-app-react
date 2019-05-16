@@ -1,4 +1,4 @@
 export interface ForecastDetailsProps {
-  displayMode: boolean;
+  isSimpleMode: boolean;
   forecast: any;
 }

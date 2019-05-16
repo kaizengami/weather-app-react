@@ -7,7 +7,7 @@ class ForecastDetails extends React.PureComponent<ForecastDetailsProps> {
     const { rh, precip, wind_dir, wind_spd } = this.props.forecast;
     return (
       <div className="daily-forecast-block">
-        {this.props.displayMode ? (
+        {this.props.isSimpleMode ? (
           <>
             <div className="daily-forecast-col">
               <div className="daily-forecast-humidity" />

@@ -4,8 +4,7 @@ import { getWeatherIcon } from "../../utils/getWeatherIcon";
 
 interface DayProps {
   forecast: weatherDaily;
-  render(isSimpleMode: boolean): void;
-  isSimpleMode: boolean;
+  renderForecastDetails(): void;
 }
 
 class Day extends React.PureComponent<DayProps> {
@@ -24,7 +23,7 @@ class Day extends React.PureComponent<DayProps> {
     return (
       <button className="daily-forecast-button">
         <div className="daily-forecast-day">{this.getDate(datetime)}</div>
-        {this.props.render(this.props.isSimpleMode)}
+        {this.props.renderForecastDetails()}
         <div className="daily-forecast-col">
           <div className="daily-forecast-weather-icon">
             <i className={"wi " + getWeatherIcon(code)} />
